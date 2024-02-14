@@ -7,15 +7,6 @@ const frameMetadata = getFrameMetadata({
     {
       label: 'Story time!',
     },
-    {
-      action: 'link',
-      label: 'Link to Google',
-      target: 'https://www.google.com',
-    },
-    {
-      label: 'Redirect to pictures',
-      action: 'post_redirect',
-    },
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/park-3.png`,
