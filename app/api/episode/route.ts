@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-// import { getClientAndDb } from "../mongo/db";
 import getEpisodeData from "../../utils/dbUtils";
 
 export const dynamic = "force-dynamic";
