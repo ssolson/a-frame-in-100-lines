@@ -8,7 +8,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }  
   let accountAddress: string | undefined = '';
   let segmentNumber: string | undefined = '';
-  let encodedSegmentNumber: string | undefined = '';
 
   // Encode the dynamic text for safe URL inclusion
   const episodeNumber: string = '700';
@@ -23,8 +22,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (message?.input) {
     segmentNumber = message.input;
-    const encodedSegmentNumber = encodeURIComponent(segmentNumber);
-
   }
   // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}?segment_number=${text}`;
   // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${encodedSegmentNumber}`;

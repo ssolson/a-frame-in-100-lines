@@ -59,6 +59,18 @@ export async function GET(req: NextRequest) {
           >
             <b>{segmentData.segment_title}</b>
           </div>
+          <div
+            style={{
+              fontSize: 20,
+              color: 'white',
+              textAlign: 'left', // Align the bullets to the left
+              lineHeight: 1.5,
+            }}
+          >
+            {segmentData.bullets.map((bullet, index) => (
+              <div key={index} style={{ marginBottom: '10px' }}>{`- ${bullet}`}</div>
+            ))}
+          </div>
         </div>
       ),
       {
