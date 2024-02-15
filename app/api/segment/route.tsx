@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
             style={{
               display: 'flex', // This is crucial
               flexDirection: 'column', // Stack the bullet points vertically
-              alignItems: 'start', // Align items to the start (left) within this div
+              alignItems: 'flex-start', // Align items to the flex-start (left) within this div
               color: 'white',
               textAlign: 'left', // Align the text to the left
             }}

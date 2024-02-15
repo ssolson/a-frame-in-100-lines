@@ -10,7 +10,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   let segmentNumber: string | undefined = '';
 
   // Encode the dynamic text for safe URL inclusion
-  const episodeNumber: string = '700';
+  const episodeNumber: string = '730';
   const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
 
   const body: FrameRequest = await req.json();
