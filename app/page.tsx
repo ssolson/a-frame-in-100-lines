@@ -11,7 +11,7 @@ const frameMetadata = getFrameMetadata({
   image: {
     src: `${process.env.NEXT_PUBLIC_URL}/api/og`,
     // src: `${NEXT_PUBLIC_URL}/park-3.png`,
-    // aspectRatio: '1:1',
+    aspectRatio: '1:1',
   },
   input: {
     text: 'Tell me a boat story',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: 'Hello World!',
   description: 'LFG',
   openGraph: {
-    title: 'Heello World!',
+    title: 'Hello World!',
     description: 'LFG',
     images: [`${process.env.NEXT_PUBLIC_URL}/api/og`],
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>zizzamia.xyz</h1>
+      <h1>Hello World</h1>
     </>
   );
 }
