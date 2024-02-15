@@ -1,10 +1,17 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+  // Get URL
+  if (!process.env.NEXT_PUBLIC_URL) {
+    throw new Error('Invalid/Missing environment variable: "NEXT_PUBLIC_URL"');
+  }  
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
+
+  // Encode the dynamic text for safe URL inclusion
+  const episodeNumber: string = '700';
+  const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -16,7 +23,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.input) {
     text = message.input;
   }
-  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og`;
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}`;
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -26,7 +33,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: {
-        src:`${process.env.NEXT_PUBLIC_URL}/api/og`,
+        src: ogImageUrl,
+        // src:`${process.env.NEXT_PUBLIC_URL}/api/og`,
         // src: `${NEXT_PUBLIC_URL}/park-3.png`,
       },
       postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
