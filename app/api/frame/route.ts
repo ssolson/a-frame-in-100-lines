@@ -16,6 +16,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.input) {
     text = message.input;
   }
+  const PUBLIC_URL = process.env.NEXT_PUBLIC_URL
+  const ogImageUrl = `${PUBLIC_URL}/api/og`;
 
   return new NextResponse(
     getFrameHtmlResponse({
