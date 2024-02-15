@@ -2,6 +2,9 @@ import { getFrameMetadata } from '@coinbase/onchainkit';
 import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from './config';
 
+const PUBLIC_URL = process.env.NEXT_PUBLIC_URL;
+const ogImageUrl = `${PUBLIC_URL}/api/og`;
+
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
@@ -15,10 +18,8 @@ const frameMetadata = getFrameMetadata({
   input: {
     text: 'Tell me a boat story',
   },
-  postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+  postUrl: `${PUBLIC_URL}/api/frame`,
 });
-const PUBLIC_URL = process.env.NEXT_PUBLIC_URL;
-const ogImageUrl = `${PUBLIC_URL}/api/og`;
 
 export const metadata: Metadata = {
   title: 'zizzamia.xyz',
