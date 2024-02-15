@@ -7,9 +7,6 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
-    // const { client, db } = await getClientAndDb();
-    // const collection = db.collection("thedailygweiRecap");
-
     const { searchParams } = req.nextUrl;
     const episodeNumberStr = searchParams.get("episode_number");
 
