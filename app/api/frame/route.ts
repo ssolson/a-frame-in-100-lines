@@ -29,7 +29,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       image: {
         src: ogImageUrl,
       },
-      postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+      postUrl: `${PUBLIC_URL}/api/frame`,
     }),
   );
 }
