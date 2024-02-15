@@ -7,7 +7,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     throw new Error('Invalid/Missing environment variable: "NEXT_PUBLIC_URL"');
   }  
   let accountAddress: string | undefined = '';
-  let text: string | undefined = '';
+  let segmentNumber: string | undefined = '';
+  let encodedSegmentNumber: string | undefined = '';
 
   // Encode the dynamic text for safe URL inclusion
   const episodeNumber: string = '700';
@@ -21,21 +22,22 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   if (message?.input) {
-    text = message.input;
+    segmentNumber = message.input;
+    const encodedSegmentNumber = encodeURIComponent(segmentNumber);
+
   }
-  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}`;
+  // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}?segment_number=${text}`;
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${encodedSegmentNumber}`;
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Story: ${text} 🌲`,
+          label: `Story: ${segmentNumber} 🌲`,
         },
       ],
       image: {
         src: ogImageUrl,
-        // src:`${process.env.NEXT_PUBLIC_URL}/api/og`,
-        // src: `${NEXT_PUBLIC_URL}/park-3.png`,
       },
       postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
     }),
