@@ -28,7 +28,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
   // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}?segment_number=${text}`;
   // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${encodedSegmentNumber}`;
-  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=2`;
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${segmentNumber}`;
 
   return new NextResponse(
     getFrameHtmlResponse({
