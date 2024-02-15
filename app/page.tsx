@@ -17,6 +17,8 @@ const frameMetadata = getFrameMetadata({
   },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
+const PUBLIC_URL = process.env.NEXT_PUBLIC_URL;
+const ogImageUrl = `${PUBLIC_URL}/api/og`;
 
 export const metadata: Metadata = {
   title: 'zizzamia.xyz',
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'zizzamia.xyz',
     description: 'LFG',
-    images: [`${NEXT_PUBLIC_URL}/park-1.png`],
+    images: [ogImageUrl],
   },
   other: {
     ...frameMetadata,
