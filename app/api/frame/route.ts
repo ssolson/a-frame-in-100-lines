@@ -16,8 +16,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.input) {
     text = message.input;
   }
-  const PUBLIC_URL = process.env.NEXT_PUBLIC_URL
-  const ogImageUrl = `${PUBLIC_URL}/api/og`;
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og`;
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -27,9 +26,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         },
       ],
       image: {
-        src: ogImageUrl,
+        src: `${NEXT_PUBLIC_URL}/park-3.png`,
       },
-      postUrl: `${PUBLIC_URL}/api/frame`,
+      postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
     }),
   );
 }
