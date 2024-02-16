@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
             }}
           >
             <b>
-              {segmentData.segment_number} / {episodeData.episode_data.length}:{' '}
+              {segmentData.segment_number + 1}/{episodeData.episode_data.length}:{' '}
               {segmentData.segment_title}
             </b>
           </div>
