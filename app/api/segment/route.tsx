@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
             }}
           >
             {segmentData.bullets.map((bullet, index) => (
-              <div key={index} style={{ marginBottom: '10px' }}>
+              <div key={index} style={{ display: 'flex', marginBottom: '10px' }}>
                 - {bullet}
               </div>
             ))}
