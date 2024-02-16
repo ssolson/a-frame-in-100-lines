@@ -44,8 +44,25 @@ export async function GET(req: NextRequest) {
             flexWrap: 'nowrap',
             backgroundColor: 'black',
             backgroundSize: '100px 100px',
+            position: 'relative', // Add this to position your ep number and title
           }}
         >
+          {/* Episode Number and Title */}
+          <div
+            style={{
+              position: 'absolute', // Position it absolutely
+              top: 0, // Align to the top
+              left: 0, // Align to the left
+              color: 'white', // Text color
+              padding: '10px', // Add some padding around the text
+              textAlign: 'left', // Align the text to the left
+              fontSize: '24px', // Adjust font size as needed
+            }}
+          >
+            {episodeData.episode_number}: {episodeData.episode_title}
+          </div>
+
+          {/* Segment Title */}
           <div
             style={{
               display: 'flex',
@@ -57,8 +74,13 @@ export async function GET(req: NextRequest) {
               whiteSpace: 'pre-wrap',
             }}
           >
-            <b>{segmentData.segment_title}</b>
+            <b>
+              {segmentData.segment_number} / {episodeData.episode_data.length}:{' '}
+              {segmentData.segment_title}
+            </b>
           </div>
+
+          {/* Bullet Points */}
           <div
             style={{
               display: 'flex',
@@ -66,7 +88,7 @@ export async function GET(req: NextRequest) {
               alignItems: 'flex-start',
               color: 'white',
               textAlign: 'left',
-              fontSize: 40,
+              fontSize: 36,
             }}
           >
             {segmentData.bullets.map((bullet, index) => (
