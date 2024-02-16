@@ -30,12 +30,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
-        {
-          label: `Segment Number: ${segmentNumber} 🌲`,
+        {         
+          label: `GoTo New Segment Number: ${segmentNumber} 🌲`,
         },
       ],
       image: {
         src: ogImageUrl,
+      },
+      input: {
+        text: 'Enter Segment Number',
       },
       postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
     }),
