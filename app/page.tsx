@@ -1,5 +1,9 @@
 // page.tsx;
 
+import { metadata } from './pageMetadata';
+
+export { metadata };
+
 export default function Page() {
   return (
     <div style={{ color: 'white', backgroundColor: 'black', height: '100vh', width: '100vw' }}>
