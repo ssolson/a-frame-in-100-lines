@@ -7,6 +7,6 @@ export const frameButtons: FrameMetadataType['buttons'] = [
       label: 'Go To Segment #',
     },
     {
-        label: 'Next Segment',
-      },
+      label: 'Next Segment',
+    },
   ]
