@@ -61,11 +61,12 @@ export async function GET(req: NextRequest) {
           </div>
           <div
             style={{
-              display: 'flex', // This is crucial
+              display: 'flex',
               flexDirection: 'column', // Stack the bullet points vertically
-              alignItems: 'flex-start', // Align items to the flex-start (left) within this div
+              alignItems: 'flex-start',
               color: 'white',
-              textAlign: 'left', // Align the text to the left
+              textAlign: 'left',
+              fontSize: 40,
             }}
           >
             {segmentData.bullets.map((bullet, index) => (
