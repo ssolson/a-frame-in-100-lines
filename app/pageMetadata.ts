@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: title,
     description: description,
-    // images: [`${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${dynamicText}`],
+    images: [`${process.env.NEXT_PUBLIC_URL}/park-1.png`],
   },
 
   // Frames Metadata  
