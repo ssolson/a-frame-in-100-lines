@@ -1,7 +1,7 @@
 // pageMetadata.ts
 
 import type { Metadata } from 'next';
-import { frameMetadata } from './frameMetadata';
+import { frameMetadata } from './frame/frameMetadata';
 
 
 const title = 'TLDL Frames';

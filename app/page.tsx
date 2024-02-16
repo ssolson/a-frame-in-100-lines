@@ -1,6 +1,6 @@
 // page.tsx;
 
-import { metadata } from './pageMetadata';
+import { metadata } from './components/pageMetadata';
 
 // This is the Frame
 export { metadata };
