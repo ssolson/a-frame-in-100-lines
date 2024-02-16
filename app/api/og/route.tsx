@@ -47,7 +47,9 @@ export async function GET(req: NextRequest) {
               whiteSpace: 'pre-wrap',
             }}
           >
-            <b>{episodeData.episode_title}</b>
+            <b>
+              {episodeData.episode_number}: {episodeData.episode_title}
+            </b>
           </div>
           <div
             style={{
