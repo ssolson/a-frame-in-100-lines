@@ -15,12 +15,11 @@ const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${dynam
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'Story time!',
+      label: 'Go To Segment #',
     },
   ],
   image: {
     src: ogImageUrl,
-    // src: `${NEXT_PUBLIC_URL}/park-3.png`,
     // aspectRatio: '1:1',
   },
   input: {

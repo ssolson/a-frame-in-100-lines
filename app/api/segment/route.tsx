@@ -51,6 +51,7 @@ export async function GET(req: NextRequest) {
           <div
             style={{
               position: 'absolute', // Position it absolutely
+              display: 'flex',
               top: 0, // Align to the top
               left: 0, // Align to the left
               color: 'white', // Text color
