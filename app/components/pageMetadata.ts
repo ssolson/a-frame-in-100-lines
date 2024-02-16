@@ -1,4 +1,4 @@
-// pageMetadata.ts
+// app/components/pageMetadata.ts
 
 import type { Metadata } from 'next';
 import { frameMetadata } from './frame/frameMetadata';
