@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   title: title,
   description: description,
 
-  // Standard Open Graph Metadata
+  // Standard Open Graph Metadata (Shows in Discord ect)
   openGraph: {
     title: title,
     description: description,
-    images: [`${process.env.NEXT_PUBLIC_URL}/park-1.png`],
+    images: [`${process.env.NEXT_PUBLIC_URL}/TLDL_wide.png`],
   },
 
-  // Frames Metadata  
+  // Frames Metadata (Shows in Warpcast Frames) 
   other: {
     ...frameMetadata,
   },
