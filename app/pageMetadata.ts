@@ -1,33 +1,25 @@
 // pageMetadata.ts
-import { getFrameMetadata } from '@coinbase/onchainkit';
+
 import type { Metadata } from 'next';
+import { frameMetadata } from './frameMetadata';
 
-const dynamicText = encodeURIComponent('730');
-const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${dynamicText}`;
 
-const frameMetadata = getFrameMetadata({
-  buttons: [
-    {
-      label: 'Go To Segment #',
-    },
-  ],
-  image: {
-    src: ogImageUrl,
-  },
-  input: {
-    text: 'Enter Segment Number',
-  },
-  postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
-});
+const title = 'TLDL Frames';
+const description = 'Too Long Didn\'t Listen Frames'
 
 export const metadata: Metadata = {
-  title: 'Hello World!',
-  description: 'LFG',
+  //  Metadata for the page
+  title: title,
+  description: description,
+
+  // Standard Open Graph Metadata
   openGraph: {
-    title: 'Hello World!',
-    description: 'LFG',
-    images: [`${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${dynamicText}`],
+    title: title,
+    description: description,
+    // images: [`${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${dynamicText}`],
   },
+
+  // Frames Metadata  
   other: {
     ...frameMetadata,
   },
