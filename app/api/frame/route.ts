@@ -31,7 +31,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `Story: ${segmentNumber} 🌲`,
+          label: `Segment Number: ${segmentNumber} 🌲`,
         },
       ],
       image: {

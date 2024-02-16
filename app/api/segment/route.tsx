@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
               color: 'white', // Text color
               padding: '10px', // Add some padding around the text
               textAlign: 'left', // Align the text to the left
-              fontSize: '24px', // Adjust font size as needed
+              fontSize: '28px', // Adjust font size as needed
             }}
           >
             {episodeData.episode_number}: {episodeData.episode_title}
@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
           <div
             style={{
               display: 'flex',
-              fontSize: 40,
+              fontSize: 36,
               fontStyle: 'normal',
               color: 'white',
               marginTop: 30,
@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
               alignItems: 'flex-start',
               color: 'white',
               textAlign: 'left',
-              fontSize: 36,
+              fontSize: 32,
             }}
           >
             {segmentData.bullets.map((bullet, index) => (
