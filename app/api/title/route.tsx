@@ -1,4 +1,4 @@
-// app/api/og/route.tsx
+// app/api/title/route.tsx
 
 import { ImageResponse } from 'next/og';
 import { NextRequest, NextResponse } from 'next/server';

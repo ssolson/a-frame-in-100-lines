@@ -23,7 +23,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.input) {
     segmentNumber = message.input;
   }
-  // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?episode_number=${encodedEpisodeNumber}?segment_number=${text}`;
+  // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${encodedEpisodeNumber}?segment_number=${text}`;
   // const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${encodedSegmentNumber}`;
   const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${segmentNumber}`;
 
