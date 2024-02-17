@@ -22,6 +22,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Validate Frame & get message (segment number)
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
+
+  // Check which button was clicked
+  // if (message?.button === 3) {
+  //   return NextResponse.redirect(
+  //     'https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms',
+  //     { status: 302 },
+  //   );
+  // }
+
   const segmentNumber: string | undefined = getMessageInput(message);
 
   // Get Segment Image URL
