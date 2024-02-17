@@ -1,45 +1,35 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
 
-async function getResponse(req: NextRequest): Promise<NextResponse> {
-  // Get URL
-  if (!process.env.NEXT_PUBLIC_URL) {
-    throw new Error('Invalid/Missing environment variable: "NEXT_PUBLIC_URL"');
-  }  
-  let accountAddress: string | undefined = '';
-  let segmentNumber: string | undefined = '';
+import { getMessageInput } from '../../utils/getMessageInput';
 
-  // Encode the dynamic text for safe URL inclusion
-  const episodeNumber: string = '730';
-  const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
+import { segmentButtons } from '../../components/frame/buttons';
+import { frameInput } from '../../components/frame/input';
+import { framePostUrl } from '../../components/frame/postURL';
+
+
+// Encode the dynamic text for safe URL inclusion
+const episodeNumber: string = '730';
+const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
+
+
+async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
-  if (isValid) {
-    accountAddress = message.interactor.verified_accounts[0];
-  }
-
-  if (message?.input) {
-    segmentNumber = message.input;
-  }
+  const segmentNumber: string|undefined = getMessageInput(message);
 
   const ogImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${encodedEpisodeNumber}&segment_number=${segmentNumber}`;
 
   return new NextResponse(
     getFrameHtmlResponse({
-      buttons: [
-        {         
-          label: `GoTo New Segment Number: ${segmentNumber} 🌲`,
-        },
-      ],
       image: {
         src: ogImageUrl,
       },
-      input: {
-        text: 'Enter Segment Number',
-      },
-      postUrl: `${process.env.NEXT_PUBLIC_URL}/api/frame`,
+      input: frameInput,
+      buttons: segmentButtons,
+      postUrl:framePostUrl,
     }),
   );
 }

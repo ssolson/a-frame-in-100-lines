@@ -2,7 +2,7 @@
 
 import { getFrameMetadata } from '@coinbase/onchainkit';
 
-import { frameButtons } from './buttons';
+import { titleButtons } from './buttons';
 import { titleImageUrl } from './image';
 import { frameInput } from './input';
 import { framePostUrl } from './postURL';
@@ -10,6 +10,6 @@ import { framePostUrl } from './postURL';
 export const frameMetadata = getFrameMetadata({   
   image: titleImageUrl,
   input: frameInput,
-  buttons: frameButtons,
+  buttons: titleButtons,
   postUrl: framePostUrl,
 });

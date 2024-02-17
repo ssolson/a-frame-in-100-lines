@@ -1,7 +1,8 @@
 // app/components/frame/image.ts
 
-const dynamicText = encodeURIComponent('730');
+const episodeNumber: string = '730';
+const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
 export const titleImageUrl = {
-    src: `${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${dynamicText}`,
+    src: `${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${encodedEpisodeNumber}`,
   }
 
