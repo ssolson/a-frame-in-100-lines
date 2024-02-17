@@ -1,6 +1,6 @@
 // utils/dbUtils.js
 
-import { getClientAndDb } from "../api/mongo/db";
+import { getClientAndDb } from "./mongo/db";
 
 async function getEpisodeData(episodeNumber: number) {
     const { client, db } = await getClientAndDb();
