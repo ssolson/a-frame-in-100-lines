@@ -1,15 +1,18 @@
 // app/components/frame/image.ts
 
-const episodeNumber: string = '730';
-export const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
+
 
 import { getImageUrl } from '../../utils/getImageUrl';
 
-export const titleImageUrl = {
-    src: getImageUrl('title', episodeNumber) ,
+export function getTitleImageObject( episodeNumber: string, segmentNumber?: string): {src: string} {
+  const titleImage : string = getImageUrl('title', episodeNumber)
+  const titleImageObject = {
+    src: titleImage,
+  } 
+  return titleImageObject;
   }
 
-export function getSegmentImageUrl(type: 'title' | 'segment', episodeNumber: string, segmentNumber?: string): {src: string} {
+export function getSegmentImageUrl(type: 'segment', episodeNumber: string, segmentNumber?: string): {src: string} {
    
     const segmentImage : string = getImageUrl('segment', episodeNumber, segmentNumber);
     const segmentObject = {
