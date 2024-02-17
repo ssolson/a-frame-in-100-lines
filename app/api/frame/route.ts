@@ -25,11 +25,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const segmentNumber: string | undefined = getMessageInput(message);
 
   // Get Segment Image URL
-  const segmentImageUrl = getSegmentImageObject(episodeNumberStr, segmentNumber)
+  const segmentImageObject = getSegmentImageObject(episodeNumberStr, segmentNumber)
 
   return new NextResponse(
     getFrameHtmlResponse({
-      image:segmentImageUrl,      
+      image:segmentImageObject,      
       input: frameInput,
       buttons: segmentButtons,
       postUrl:framePostUrl,
