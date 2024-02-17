@@ -1,4 +1,6 @@
 // app/components/frame/postURL.ts
-import { encodedEpisodeNumber } from './image';
 
-export const framePostUrl = `${process.env.NEXT_PUBLIC_URL}/api/frame?episode_number=${encodedEpisodeNumber}`;
+export function makeFramePostUrl( episodeNumber: string ):string {
+  const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
+  return `${process.env.NEXT_PUBLIC_URL}/api/frame?episode_number=${encodedEpisodeNumber}`;
+}

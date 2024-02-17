@@ -12,7 +12,6 @@ export function getTitleImageObject( episodeNumber: string ): {src: string} {
 
 
 export function getSegmentImageObject( episodeNumber: string, segmentNumber?: string): {src: string} {
-   
     const segmentImage : string = getImageUrl('segment', episodeNumber, segmentNumber);
     const segmentImageObject = {
       src: segmentImage,

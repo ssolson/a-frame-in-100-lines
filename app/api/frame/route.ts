@@ -7,7 +7,7 @@ import { getMessageInput } from '../../utils/getMessageInput';
 
 import { segmentButtons } from '../../components/frame/buttons';
 import { frameInput } from '../../components/frame/input';
-import { framePostUrl } from '../../components/frame/postURL';
+import { makeFramePostUrl } from '../../components/frame/postURL';
 
 import { getSegmentImageObject } from '../../components/frame/image';
 
@@ -32,7 +32,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       image:segmentImageObject,      
       input: frameInput,
       buttons: segmentButtons,
-      postUrl:framePostUrl,
+      postUrl: makeFramePostUrl(episodeNumberStr),
     }),
   );
 }
