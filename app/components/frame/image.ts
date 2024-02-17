@@ -1,10 +1,8 @@
 // app/components/frame/image.ts
 
-
-
 import { getImageUrl } from '../../utils/getImageUrl';
 
-export function getTitleImageObject( episodeNumber: string, segmentNumber?: string): {src: string} {
+export function getTitleImageObject( episodeNumber: string ): {src: string} {
   const titleImage : string = getImageUrl('title', episodeNumber)
   const titleImageObject = {
     src: titleImage,
@@ -12,11 +10,12 @@ export function getTitleImageObject( episodeNumber: string, segmentNumber?: stri
   return titleImageObject;
   }
 
-export function getSegmentImageUrl(type: 'segment', episodeNumber: string, segmentNumber?: string): {src: string} {
+
+export function getSegmentImageObject( episodeNumber: string, segmentNumber?: string): {src: string} {
    
     const segmentImage : string = getImageUrl('segment', episodeNumber, segmentNumber);
-    const segmentObject = {
+    const segmentImageObject = {
       src: segmentImage,
     } 
-    return segmentObject;
+    return segmentImageObject;
   }

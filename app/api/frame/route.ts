@@ -9,7 +9,7 @@ import { segmentButtons } from '../../components/frame/buttons';
 import { frameInput } from '../../components/frame/input';
 import { framePostUrl } from '../../components/frame/postURL';
 
-import { getSegmentImageUrl } from '../../components/frame/image';
+import { getSegmentImageObject } from '../../components/frame/image';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Get Episode Number
@@ -25,7 +25,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const segmentNumber: string | undefined = getMessageInput(message);
 
   // Get Segment Image URL
-  const segmentImageUrl = getSegmentImageUrl('segment', episodeNumberStr, segmentNumber)
+  const segmentImageUrl = getSegmentImageObject(episodeNumberStr, segmentNumber)
 
   return new NextResponse(
     getFrameHtmlResponse({
