@@ -9,7 +9,7 @@ import { segmentButtons } from '../../components/frame/buttons';
 import { frameInput } from '../../components/frame/input';
 import { makeFramePostUrl } from '../../components/frame/postURL';
 
-import { getSegmentImageObject } from '../../components/frame/image';
+import { getTitleImageObject, getSegmentImageObject } from '../../components/frame/image';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Get Episode Number
@@ -23,22 +23,25 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
-  // Check which button was clicked
-  // if (message?.button === 3) {
-  //   return NextResponse.redirect(
-  //     'https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms',
-  //     { status: 302 },
-  //   );
-  // }
-
-  const segmentNumber: string | undefined = getMessageInput(message);
-
-  // Get Segment Image URL
-  const segmentImageObject = getSegmentImageObject(episodeNumberStr, segmentNumber)
+  // Determine Image URL based on button
+  let imageObject;
+  if (message?.button === 1) {
+   const segmentNumber: string | undefined = getMessageInput(message);
+    // Get Segment Image URL
+    imageObject = getSegmentImageObject(episodeNumberStr, segmentNumber)
+  } else if (message?.button === 2) {
+    // Get Title Image URL
+    imageObject = getTitleImageObject(episodeNumberStr);
+    console.log("BODY:",body)
+    console.log('MESSAGE:', message)
+  }
+  else {
+    imageObject = getTitleImageObject(episodeNumberStr);
+  }
 
   return new NextResponse(
     getFrameHtmlResponse({
-      image:segmentImageObject,      
+      image:imageObject,      
       input: frameInput,
       buttons: segmentButtons,
       postUrl: makeFramePostUrl(episodeNumberStr),
