@@ -24,11 +24,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
   const segmentNumber: string | undefined = getMessageInput(message);
 
-  // Set the segment image URL
-  // const segmentImageUrl = { 
-  //   src: `${process.env.NEXT_PUBLIC_URL}/api/segment?episode_number=${episodeNumberStr}&segment_number=${segmentNumber}`
-  // };
-
+  // Get Segment Image URL
   const segmentImageUrl = getSegmentImageUrl('segment', episodeNumberStr, segmentNumber)
 
   return new NextResponse(
