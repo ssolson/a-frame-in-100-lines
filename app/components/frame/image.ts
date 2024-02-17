@@ -3,7 +3,9 @@
 const episodeNumber: string = '730';
 export const encodedEpisodeNumber = encodeURIComponent(episodeNumber);
 
+import { getImageUrl } from '../../utils/getImageUrl';
+
 export const titleImageUrl = {
-    src: `${process.env.NEXT_PUBLIC_URL}/api/title?episode_number=${encodedEpisodeNumber}`,
+    src: getImageUrl('title', episodeNumber) ,
   }
 
