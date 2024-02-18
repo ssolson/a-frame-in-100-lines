@@ -34,6 +34,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     imageObject = getTitleImageObject(episodeNumberStr);
     console.log("BODY:",body)
     console.log('MESSAGE:', message)
+    console.log('interactor:', message.raw.action.interactor)
+    console.log('tapped_button:', message.raw.action.tapped_button)
+    console.log('input:', message.raw.action.input)
   }
   else {
     imageObject = getTitleImageObject(episodeNumberStr);
