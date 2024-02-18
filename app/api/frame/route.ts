@@ -19,6 +19,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ status: 400, message: 'Episode number not found' });
   }
 
+  // Check for current segment
+  let currentSegmentNumber = searchParams.get('current_segment');
+  if (!currentSegmentNumber) {
+    currentSegmentNumber = '1';
+  }
+
   // Validate Frame & get message (segment number)
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -26,32 +32,27 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Determine Image URL based on button
   let imageObject;
   if (message?.button === 1) {
-   const segmentNumber: string | undefined = getMessageInput(message);
+    const segmentNumber: string | undefined = getMessageInput(message);
     // Get Segment Image URL
-    imageObject = getSegmentImageObject(episodeNumberStr, segmentNumber)
+    imageObject = getSegmentImageObject(episodeNumberStr, segmentNumber);
   } else if (message?.button === 2) {
-    // Get Title Image URL
-    imageObject = getTitleImageObject(episodeNumberStr);
-    console.log("BODY:",body)
-    console.log('MESSAGE:', message)
-    console.log('interactor:', message.raw.action.interactor)
-    console.log('tapped_button:', message.raw.action.tapped_button)
-    console.log('input:', message.raw.action.input)
-  }
-  else {
+    // Go to next segment
+    const nextSegmentNumber: Number = parseInt(currentSegmentNumber, 10) + 1;
+    currentSegmentNumber = nextSegmentNumber.toString();
+    imageObject = getSegmentImageObject(episodeNumberStr, currentSegmentNumber);
+  } else {
     imageObject = getTitleImageObject(episodeNumberStr);
   }
 
   return new NextResponse(
     getFrameHtmlResponse({
-      image:imageObject,      
+      image: imageObject,
       input: frameInput,
       buttons: segmentButtons,
-      postUrl: makeFramePostUrl(episodeNumberStr),
+      postUrl: makeFramePostUrl(episodeNumberStr, currentSegmentNumber),
     }),
   );
 }
-
 
 export async function POST(req: NextRequest): Promise<Response> {
   return getResponse(req);
