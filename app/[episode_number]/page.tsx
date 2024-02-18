@@ -5,11 +5,12 @@ import { getDynamicMetadata } from '../components/pageMetadata';
 
 export default function Page() {
   const params = useParams();
+  console.log('params', params);
   // Ensure `episode_number` is treated as a string, even if useParams() returns a string array
-  const episode_number = Array.isArray(params.episode_number)
-    ? params.episode_number[0]
-    : params.episode_number;
-
+  //   const episode_number = Array.isArray(params.episode_number)
+  //     ? params.episode_number[0]
+  //     : params.episode_number;
+  const episode_number = '700';
   if (!episode_number) {
     return <div>Episode number is required.</div>;
   }
