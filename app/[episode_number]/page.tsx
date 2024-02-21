@@ -1,24 +1,25 @@
 // app/[episode_number]/page.tsx
 
+import { GetServerSideProps } from 'next';
 import { useParams } from 'next/navigation';
 import { getDynamicMetadata } from '../components/pageMetadata';
+import { FrameMetadataType } from '@coinbase/onchainkit';
 
-export default function Page() {
-  const params = useParams();
-  console.log('params', params);
-  // Ensure `episode_number` is treated as a string, even if useParams() returns a string array
-  //   const episode_number = Array.isArray(params.episode_number)
-  //     ? params.episode_number[0]
-  //     : params.episode_number;
-  const episode_number = '700';
-  if (!episode_number) {
-    return <div>Episode number is required.</div>;
-  }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  const episodeNumber = params?.episode_number;
+  // Ensure episodeNumber is a string
+  const episodeNumStr = typeof episodeNumber === 'string' ? episodeNumber : '700';
 
-  // This is the Frame
-  const metadata = getDynamicMetadata(episode_number);
+  return {
+    props: {
+      metadata: getDynamicMetadata(episodeNumStr),
+    },
+  };
+};
 
-  // This is the normal Page
+// This is the normal Page
+export default function Page({ metadata }: { metadata: FrameMetadataType }) {
   return (
     <div style={{ color: 'white', backgroundColor: 'black' }}>
       <h1>TLDL Frames</h1>
