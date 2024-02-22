@@ -10,15 +10,15 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const episodeNumberStr = searchParams.get('episode_number');
 
-  let episodeDataResult;
-  let episodeNumberInt;
-  if (episodeNumberStr === 'latest') {
-    episodeDataResult = await getEpisodeData();
-    console.log(episodeDataResult);
-  } else if (episodeNumberStr) {
-    episodeNumberInt = parseInt(episodeNumberStr, 10);
-    episodeDataResult = await getEpisodeData(episodeNumberInt);
-
+  if (episodeNumberStr) {
+    let episodeDataResult;
+    let episodeNumberInt;
+    if (episodeNumberStr === 'latest') {
+      episodeDataResult = await getEpisodeData();
+    } else {
+      const episodeNumberInt = parseInt(episodeNumberStr, 10);
+      episodeDataResult = await getEpisodeData(episodeNumberInt);
+    }
     if (!episodeDataResult) {
       return NextResponse.json({ status: 404, message: 'Data not found' });
     }

@@ -15,7 +15,6 @@ async function getEpisodeData(episodeNumber?: number) {
   } else {
     // If no episodeNumber is provided, find the latest episode
     episodeData = await collection.findOne({}, { sort: { episode_date: -1 } });
-    console.log('dbUtils', episodeData);
   }
 
   return episodeData;
