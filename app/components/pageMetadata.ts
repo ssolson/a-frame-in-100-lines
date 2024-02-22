@@ -1,7 +1,7 @@
 // app/components/pageMetadata.ts
 
 import type { Metadata } from 'next';
-import { frameMetadata } from './frame/frameMetadata';
+import { frameMetadata, getDynamicFrameMetadata } from './frame/frameMetadata';
 
 const title = 'TLDL Frames';
 const description = "Too Long Didn't Listen Frames";
@@ -42,7 +42,7 @@ export const getDynamicMetadata = (episodeNumber: string): Metadata => {
 
     // Frames Metadata (Shows in Warpcast Frames)
     other: {
-      ...frameMetadata,
+      ...getDynamicFrameMetadata(episodeNumber),
     },
   };
 };
