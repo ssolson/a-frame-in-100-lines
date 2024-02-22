@@ -11,10 +11,12 @@ export async function GET(req: NextRequest) {
   const episodeNumberStr = searchParams.get('episode_number');
 
   let episodeDataResult;
+  let episodeNumberInt;
   if (episodeNumberStr === 'latest') {
     episodeDataResult = await getEpisodeData();
+    console.log(episodeDataResult);
   } else if (episodeNumberStr) {
-    const episodeNumberInt = parseInt(episodeNumberStr, 10);
+    episodeNumberInt = parseInt(episodeNumberStr, 10);
     episodeDataResult = await getEpisodeData(episodeNumberInt);
 
     if (!episodeDataResult) {
