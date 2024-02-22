@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
               lineHeight: '1',
             }}
           >
-            {episodeData.episode_data.map((segment, index) => (
+            {episodeData.episode_data.slice(1).map((segment, index) => (
               <p style={{ margin: '0px' }} key={index}>
                 {index + 1}. {segment.segment_title}.
               </p>

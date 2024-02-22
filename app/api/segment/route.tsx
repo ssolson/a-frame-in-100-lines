@@ -24,7 +24,13 @@ export async function GET(req: NextRequest) {
     }
 
     // Set episode data type
-    const episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
+    let episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
+
+    // Modify episode_data property to exclude Introductory song
+    episodeData = {
+      ...episodeData,
+      episode_data: episodeData.episode_data.slice(1),
+    };
 
     // Validate segment number
     const segmentNumberInt = parseInt(segmentNumberStr, 10);
@@ -52,36 +58,58 @@ export async function GET(req: NextRequest) {
             position: 'relative', // Add this to position your ep number and title
           }}
         >
-          {/* Episode Number and Title */}
+          {/* Episode Number, Title, and date */}
           <div
             style={{
-              position: 'absolute', // Position it absolutely
+              position: 'absolute',
               display: 'flex',
+              flexDirection: 'column',
               top: 0, // Align to the top
               left: 0, // Align to the left
               color: 'white', // Text color
-              padding: '10px', // Add some padding around the text
-              textAlign: 'left', // Align the text to the left
-              fontSize: '28px', // Adjust font size as needed
+              padding: '10px',
+              textAlign: 'left',
+              fontSize: '28px',
             }}
           >
             {episodeData.episode_number}: {episodeData.episode_title}
+          </div>
+
+          {/* Episode Date */}
+          <div
+            style={{
+              position: 'absolute', // Position it absolutely
+              top: '10px', // Align to the top
+              right: '10px', // Align to the right
+              display: 'flex',
+              fontSize: '28px', // Adjust font size as needed
+              fontStyle: 'normal',
+              color: 'white',
+              lineHeight: 1.8,
+              whiteSpace: 'pre-wrap',
+              textAlign: 'right', // Align text to the right
+            }}
+          >
+            <div style={{ display: 'flex', fontSize: '22px' }}>
+              {`${episodeData.episode_date.toString().substring(0, 4)}/${episodeData.episode_date.toString().substring(4, 6)}/${episodeData.episode_date.toString().substring(6, 8)}`}
+            </div>
           </div>
 
           {/* Segment Title */}
           <div
             style={{
               display: 'flex',
-              fontSize: 36,
+              justifyContent: 'flex-start',
+              fontSize: 42,
               fontStyle: 'normal',
               color: 'white',
               marginTop: 30,
               lineHeight: 1.8,
               whiteSpace: 'pre-wrap',
+              textAlign: 'left',
             }}
           >
-            <b>
-              {segmentData.segment_number + 1}/{episodeData.episode_data.length}:{' '}
+            <b style={{ textDecoration: 'underline', textDecorationSkipInk: 'auto' }}>
               {segmentData.segment_title}
             </b>
           </div>
@@ -94,7 +122,7 @@ export async function GET(req: NextRequest) {
               alignItems: 'flex-start',
               color: 'white',
               textAlign: 'left',
-              fontSize: 32,
+              fontSize: 30,
             }}
           >
             {segmentData.bullets.map((bullet, index) => (
@@ -102,6 +130,26 @@ export async function GET(req: NextRequest) {
                 - {bullet}
               </div>
             ))}
+          </div>
+
+          {/* Segment Number / Total Segment Number */}
+          <div
+            style={{
+              position: 'absolute', // Position it absolutely
+              bottom: '10px', // Align to the bottom
+              right: '10px', // Align to the right
+              display: 'flex',
+              fontSize: '28px', // Adjust font size as needed
+              fontStyle: 'normal',
+              color: 'white',
+              lineHeight: 1.8,
+              whiteSpace: 'pre-wrap',
+              textAlign: 'right', // Align text to the right
+            }}
+          >
+            <b>
+              {segmentData.segment_number}/{episodeData.episode_data.length}
+            </b>
           </div>
         </div>
       ),
