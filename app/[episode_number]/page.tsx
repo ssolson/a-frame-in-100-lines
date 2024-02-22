@@ -43,7 +43,10 @@ export default function Page({ params }: { params: { episode_number: string } })
         content={metadata?.other?.['fc:frame:image:aspect_ratio'] as string}
       />
       {renderButtonMetaTags()}
-      <meta property="fc:frame:postUrl" content={metadata?.other?.postUrl as string} />
+      <meta
+        property="fc:frame:postUrl"
+        content={metadata?.other?.['fc:frame:post_url'] as string}
+      />
     </div>
   );
 }
