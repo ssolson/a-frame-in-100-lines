@@ -17,7 +17,7 @@ export default function Page({ params }: { params: { episode_number: string } })
       <meta property="og:image" content={metadata?.openGraph?.images as string} />
 
       <meta property="fc:frame" content="vNext" />
-      <meta property="fc:frame:image" content={metadata?.other?.image as string} />
+      <meta property="fc:frame:image" content={metadata?.other?.['fc:frame:image'] as string} />
       <meta property="fc:frame:input" content={metadata?.other?.input as string} />
       {/* <meta property="fc:frame:button" content={metadata?.other?.buttons[0] as string} /> */}
       {/* <meta property="fc:frame:buttons" content={metadata?.other?.buttons as string} /> */}
