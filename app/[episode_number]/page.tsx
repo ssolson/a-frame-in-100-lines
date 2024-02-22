@@ -1,14 +1,11 @@
 // app/[episode_number]/page.tsx
 
 import { getDynamicMetadata } from '../components/pageMetadata';
-import { useParams } from 'next/navigation';
 import type { Metadata } from 'next';
 
 // This is the normal Page
-export default function Page() {
-  const { episode_number } = useParams<{ episode_number: string }>();
-
-  const metadata: Metadata = getDynamicMetadata(episode_number);
+export default function Page({ params }: { params: { episode_number: string } }) {
+  const metadata: Metadata = getDynamicMetadata(params.episode_number);
 
   return (
     <div style={{ color: 'white', backgroundColor: 'black' }}>
