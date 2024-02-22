@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { episode_number: string } })
       />
       {renderButtonMetaTags()}
       <meta
-        property="fc:frame:postUrl"
+        property="fc:frame:post_url"
         content={metadata?.other?.['fc:frame:post_url'] as string}
       />
     </div>
