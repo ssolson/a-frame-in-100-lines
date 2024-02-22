@@ -7,13 +7,11 @@ import { getTitleImageObject } from './image';
 import { frameInput } from './input';
 import { makeFramePostUrl } from './postURL';
 
-const episodeNumber: string = '730';
-
 export const frameMetadata = getFrameMetadata({
-  image: getTitleImageObject(episodeNumber),
+  image: getTitleImageObject('latest'),
   input: frameInput,
   buttons: titleButtons,
-  postUrl: makeFramePostUrl(episodeNumber),
+  postUrl: makeFramePostUrl('latest'),
 });
 
 export const getDynamicFrameMetadata = (episodeNumber: string) => {

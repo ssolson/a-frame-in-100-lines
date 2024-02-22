@@ -10,11 +10,14 @@ import { frameInput } from '../../components/frame/input';
 import { makeFramePostUrl } from '../../components/frame/postURL';
 
 import { getTitleImageObject, getSegmentImageObject } from '../../components/frame/image';
+import { EpisodeProps } from '../../../types';
+
+import getEpisodeData from '../../utils/dbUtils';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Get Episode Number
   const { searchParams } = new URL(req.url);
-  const episodeNumberStr = searchParams.get('episode_number');
+  let episodeNumberStr = searchParams.get('episode_number');
   if (!episodeNumberStr) {
     return NextResponse.json({ status: 400, message: 'Episode number not found' });
   }
@@ -42,6 +45,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     imageObject = getSegmentImageObject(episodeNumberStr, currentSegmentNumber);
   } else {
     imageObject = getTitleImageObject(episodeNumberStr);
+  }
+
+  //  If episode number is latest, then get the # to prevent look up every time
+  if (episodeNumberStr === 'latest') {
+    const episodeDataResult = await getEpisodeData();
+    const episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
+    episodeNumberStr = String(episodeData.episode_number);
   }
 
   return new NextResponse(

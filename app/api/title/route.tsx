@@ -10,9 +10,12 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const episodeNumberStr = searchParams.get('episode_number');
 
-  if (episodeNumberStr) {
+  let episodeDataResult;
+  if (episodeNumberStr === 'latest') {
+    episodeDataResult = await getEpisodeData();
+  } else if (episodeNumberStr) {
     const episodeNumberInt = parseInt(episodeNumberStr, 10);
-    const episodeDataResult = await getEpisodeData(episodeNumberInt);
+    episodeDataResult = await getEpisodeData(episodeNumberInt);
 
     if (!episodeDataResult) {
       return NextResponse.json({ status: 404, message: 'Data not found' });

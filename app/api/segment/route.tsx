@@ -12,17 +12,22 @@ export async function GET(req: NextRequest) {
   const segmentNumberStr = searchParams.get('segment_number');
 
   if (episodeNumberStr && segmentNumberStr) {
-    const episodeNumberInt = parseInt(episodeNumberStr, 10);
-    const segmentNumberInt = parseInt(segmentNumberStr, 10);
-    const episodeDataResult = await getEpisodeData(episodeNumberInt);
-
+    let episodeDataResult;
+    if (episodeNumberStr === 'latest') {
+      episodeDataResult = await getEpisodeData();
+    } else if (episodeNumberStr) {
+      const episodeNumberInt = parseInt(episodeNumberStr, 10);
+      episodeDataResult = await getEpisodeData(episodeNumberInt);
+    }
     if (!episodeDataResult) {
       return NextResponse.json({ status: 404, message: 'Data not found' });
     }
 
+    // Set episode data type
     const episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
 
     // Validate segment number
+    const segmentNumberInt = parseInt(segmentNumberStr, 10);
     if (segmentNumberInt <= 0 || segmentNumberInt > episodeData.episode_data.length) {
       return NextResponse.json({ status: 404, message: 'Segment data not found' });
     }
