@@ -7,9 +7,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import getEpisodeData from '../../utils/dbUtils';
 import React from 'react';
 
-import { registerFont } from 'canvas';
-// registerFont('/fonts/robot/Roboto-Regular.ttf', { family: 'Roboto' });
-
 import fetch from 'node-fetch';
 
 // This URL should be the direct link to the actual font file (e.g., .woff2, .ttf)
