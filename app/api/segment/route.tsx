@@ -5,8 +5,27 @@ import { EpisodeProps, SegmentProps } from '../../../types';
 
 import { NextRequest, NextResponse } from 'next/server';
 import getEpisodeData from '../../utils/dbUtils';
+import React from 'react';
+
+import { registerFont } from 'canvas';
+// registerFont('/fonts/robot/Roboto-Regular.ttf', { family: 'Roboto' });
+
+import fetch from 'node-fetch';
+
+// This URL should be the direct link to the actual font file (e.g., .woff2, .ttf)
+const fontFileUrl = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Bold.ttf`;
+
+const fetchFontArrayBuffer = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch the font: ${response.statusText}`);
+  }
+  return response.arrayBuffer();
+};
 
 export async function GET(req: NextRequest) {
+  const fontArrayBuffer = await fetchFontArrayBuffer(fontFileUrl);
+
   const { searchParams } = new URL(req.url);
   const episodeNumberStr = searchParams.get('episode_number');
   const segmentNumberStr = searchParams.get('segment_number');
@@ -50,112 +69,127 @@ export async function GET(req: NextRequest) {
             display: 'flex',
             textAlign: 'center',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             flexDirection: 'column',
-            flexWrap: 'nowrap',
             backgroundColor: 'black',
-            backgroundSize: '100px 100px',
-            position: 'relative', // Add this to position your ep number and title
+            border: '5px solid black',
           }}
         >
-          {/* Episode Number, Title, and date */}
+          {/* Episode Number, Title, Date*/}
           <div
             style={{
-              position: 'absolute',
               display: 'flex',
-              flexDirection: 'column',
-              top: 0, // Align to the top
-              left: 0, // Align to the left
-              color: 'white', // Text color
+              justifyContent: 'space-between',
+              backgroundColor: 'rgba(0,0,0)',
+              alignItems: 'center',
+              width: '100%',
+              color: 'white',
               padding: '10px',
-              textAlign: 'left',
               fontSize: '28px',
             }}
           >
-            {episodeData.episode_number}: {episodeData.episode_title}
-          </div>
+            <div style={{ display: 'flex' }}>
+              {episodeData.episode_number}: {episodeData.episode_title}
+            </div>
 
-          {/* Episode Date */}
-          <div
-            style={{
-              position: 'absolute', // Position it absolutely
-              top: '10px', // Align to the top
-              right: '10px', // Align to the right
-              display: 'flex',
-              fontSize: '28px', // Adjust font size as needed
-              fontStyle: 'normal',
-              color: 'white',
-              lineHeight: 1.8,
-              whiteSpace: 'pre-wrap',
-              textAlign: 'right', // Align text to the right
-            }}
-          >
-            <div style={{ display: 'flex', fontSize: '22px' }}>
-              {`${episodeData.episode_date.toString().substring(0, 4)}/${episodeData.episode_date.toString().substring(4, 6)}/${episodeData.episode_date.toString().substring(6, 8)}`}
+            <div style={{ display: 'flex', fontSize: '20px' }}>
+              {`${episodeData.episode_date.toString().substring(0, 4)}.${episodeData.episode_date.toString().substring(4, 6)}.${episodeData.episode_date.toString().substring(6, 8)}`}
             </div>
           </div>
 
-          {/* Segment Title */}
+          {/* Segment Title & Bullets */}
           <div
             style={{
               display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
               justifyContent: 'flex-start',
               fontSize: 42,
               fontStyle: 'normal',
+              // backgroundColor: 'rgba(85, 9, 139)',
               color: 'white',
-              marginTop: 30,
-              lineHeight: 1.8,
               whiteSpace: 'pre-wrap',
               textAlign: 'left',
+              paddingLeft: '20px',
+              paddingRight: '20px',
             }}
           >
-            <b style={{ textDecoration: 'underline', textDecorationSkipInk: 'auto' }}>
-              {segmentData.segment_title}
-            </b>
-          </div>
+            {/* Segment Title  */}
+            <div
+              style={{
+                display: 'flex',
+                height: '25%',
+                textAlign: 'left',
+                alignItems: 'center',
+                backgroundColor: 'rgba(85, 9, 139)',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+                fontFamily: 'Arial, sans-serif',
+                fontWeight: 'bold',
+              }}
+            >
+              <b> {segmentData.segment_title}</b>
+            </div>
 
-          {/* Bullet Points */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column', // Stack the bullet points vertically
-              alignItems: 'flex-start',
-              color: 'white',
-              textAlign: 'left',
-              fontSize: 30,
-            }}
-          >
-            {segmentData.bullets.map((bullet, index) => (
-              <div key={index} style={{ display: 'flex', marginBottom: '10px' }}>
-                - {bullet}
-              </div>
-            ))}
+            {/* Bullet Points */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '75%',
+                alignItems: 'center',
+                color: 'white',
+                textAlign: 'left',
+                fontSize: 30,
+                paddingLeft: '30px',
+                paddingRight: '30px',
+              }}
+            >
+              {segmentData.bullets.map((bullet, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    marginBottom: '10px',
+                    textAlign: 'justify',
+                    textJustify: 'inter-word',
+                  }}
+                >
+                  - {bullet}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Segment Number / Total Segment Number */}
           <div
             style={{
-              position: 'absolute', // Position it absolutely
-              bottom: '10px', // Align to the bottom
-              right: '10px', // Align to the right
               display: 'flex',
-              fontSize: '28px', // Adjust font size as needed
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              paddingRight: '10px',
+              fontSize: '28px',
               fontStyle: 'normal',
               color: 'white',
-              lineHeight: 1.8,
-              whiteSpace: 'pre-wrap',
-              textAlign: 'right', // Align text to the right
+              // backgroundColor: 'rgba(25, 10, 10)',
+              textAlign: 'right',
+              width: '100%',
+              height: '55px',
             }}
           >
-            <b>
-              {segmentData.segment_number}/{episodeData.episode_data.length}
-            </b>
+            {segmentData.segment_number}/{episodeData.episode_data.length}
           </div>
         </div>
       ),
       {
         width: 1200,
         height: 630,
+        fonts: [
+          {
+            name: 'Roboto',
+            data: fontArrayBuffer,
+          },
+        ],
       },
     );
   } else {
