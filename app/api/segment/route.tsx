@@ -1,180 +1,128 @@
 // app/api/segment/route.tsx
 
-import { ImageResponse } from 'next/og';
-import { EpisodeProps, SegmentProps } from '../../../types';
-
-import { NextRequest, NextResponse } from 'next/server';
-import getEpisodeData from '../../utils/dbUtils';
 import React from 'react';
 
-import fetch from 'node-fetch';
+import SegmentHeader from './components/header';
+import SegmentBody from './components/body/body';
+import EpisodeFooter from './components/footer';
 
-// This URL should be the direct link to the actual font file (e.g., .woff2, .ttf)
-const fontFileUrl = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Bold.ttf`;
+import { ImageResponse } from 'next/og';
+import { NextRequest, NextResponse } from 'next/server';
 
-const fetchFontArrayBuffer = async (url: string) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch the font: ${response.statusText}`);
-  }
-  return response.arrayBuffer();
-};
+import { fetchFontArrayBuffer, arrayBufferToBase64, fontFiles } from './utils/fontUtils';
+import { fetchImageArrayBuffer, imageFiles } from './utils/imageUtils';
+import {
+  fetchAndPrepareEpisodeData,
+  validateSegmentNumber,
+  extractSegmentData,
+} from './utils/episodeUtils';
+import { fetchTweetById, extractTweetIdFromUrl } from './utils/tweetUtils';
+
+import { enrichTweet } from 'react-tweet';
 
 export async function GET(req: NextRequest) {
-  const fontArrayBuffer = await fetchFontArrayBuffer(fontFileUrl);
+  // FONTS
+  const robotoRegular = await fetchFontArrayBuffer(fontFiles.robotoRegularFile);
+  const robotoBold = await fetchFontArrayBuffer(fontFiles.robotoBoldFile);
+  const robotoMedium = await fetchFontArrayBuffer(fontFiles.robotoMediumFile);
 
+  // IMAGES
+  const TDGLogoFile = await fetchImageArrayBuffer(imageFiles.TDGLogoFile);
+  const TLDLLogo = await fetchImageArrayBuffer(imageFiles.TLDLLogo);
+  const TLDLWideData = await fetchImageArrayBuffer(imageFiles.TLDLWide);
+
+  const TDGLogo = arrayBufferToBase64(TDGLogoFile);
+  const TLDLLogoBase64 = arrayBufferToBase64(TLDLLogo);
+  const TLDLWideBase64 = arrayBufferToBase64(TLDLWideData);
+
+  // Episode & Segment
   const { searchParams } = new URL(req.url);
   const episodeNumberStr = searchParams.get('episode_number');
   const segmentNumberStr = searchParams.get('segment_number');
 
-  if (episodeNumberStr && segmentNumberStr) {
-    let episodeDataResult;
-    if (episodeNumberStr === 'latest') {
-      episodeDataResult = await getEpisodeData();
-    } else if (episodeNumberStr) {
-      const episodeNumberInt = parseInt(episodeNumberStr, 10);
-      episodeDataResult = await getEpisodeData(episodeNumberInt);
+  const episodeData = await fetchAndPrepareEpisodeData(episodeNumberStr);
+
+  if (!episodeData) {
+    return NextResponse.json({ status: 404, message: 'Episode data not found' });
+  }
+
+  if (!validateSegmentNumber(segmentNumberStr, episodeData)) {
+    return NextResponse.json({ status: 404, message: 'Segment data not found' });
+  }
+  const segmentData = extractSegmentData(segmentNumberStr!, episodeData);
+
+  // Make OG Image
+  if (segmentData) {
+    // Tweet or TLDL?
+    const tweetId = extractTweetIdFromUrl(segmentData.URL[0]);
+    let tweet = undefined;
+    let quotedTweet = undefined;
+    if (tweetId) {
+      const tweetData = await fetchTweetById(tweetId);
+      tweet = tweetData.tweet;
+      if (tweet) {
+        tweet = enrichTweet(tweet);
+      }
+      quotedTweet = tweetData.quotedTweet;
     }
-    if (!episodeDataResult) {
-      return NextResponse.json({ status: 404, message: 'Data not found' });
-    }
-
-    // Set episode data type
-    let episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
-
-    // Modify episode_data property to exclude Introductory song
-    episodeData = {
-      ...episodeData,
-      episode_data: episodeData.episode_data.slice(1),
-    };
-
-    // Validate segment number
-    const segmentNumberInt = parseInt(segmentNumberStr, 10);
-    if (segmentNumberInt <= 0 || segmentNumberInt > episodeData.episode_data.length) {
-      return NextResponse.json({ status: 404, message: 'Segment data not found' });
-    }
-
-    // Extract the specific segment data
-    const segmentData: SegmentProps = episodeData.episode_data[segmentNumberInt - 1];
 
     return new ImageResponse(
       (
         <div
           style={{
-            height: '100%',
             width: '100%',
+            height: '630px',
             display: 'flex',
             textAlign: 'center',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             flexDirection: 'column',
             backgroundColor: 'black',
-            border: '5px solid black',
+            backgroundSize: '1200px 630px',
           }}
         >
-          {/* Episode Number, Title, Date*/}
+          {/* Background Image Container */}
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              backgroundColor: 'rgba(0,0,0)',
-              alignItems: 'center',
+              position: 'absolute',
+              top: 60,
+              left: 0,
+              height: '100%',
               width: '100%',
-              color: 'white',
-              padding: '10px',
-              fontSize: '28px',
+              backgroundImage: `url(data:image/png;base64,${TLDLWideBase64})`,
+              backgroundSize: '1200px 630px',
+              backgroundColor: 'rgba(1,0,0, 0.0)',
+              opacity: 0.0,
+              zIndex: -1,
             }}
-          >
-            <div style={{ display: 'flex' }}>
-              {episodeData.episode_number}: {episodeData.episode_title}
-            </div>
+          ></div>
 
-            <div style={{ display: 'flex', fontSize: '20px' }}>
-              {`${episodeData.episode_date.toString().substring(0, 4)}.${episodeData.episode_date.toString().substring(4, 6)}.${episodeData.episode_date.toString().substring(6, 8)}`}
-            </div>
-          </div>
-
-          {/* Segment Title & Bullets */}
+          {/* Content Container */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              height: '100%',
-              justifyContent: 'flex-start',
-              fontSize: 42,
-              fontStyle: 'normal',
-              // backgroundColor: 'rgba(85, 9, 139)',
-              color: 'white',
-              whiteSpace: 'pre-wrap',
-              textAlign: 'left',
+              width: '100%',
+              height: '630px',
+              paddingTop: '10px',
               paddingLeft: '20px',
               paddingRight: '20px',
+              paddingBottom: '0px',
             }}
           >
-            {/* Segment Title  */}
-            <div
-              style={{
-                display: 'flex',
-                height: '25%',
-                textAlign: 'left',
-                alignItems: 'center',
-                backgroundColor: 'rgba(85, 9, 139)',
-                paddingLeft: '20px',
-                paddingRight: '20px',
-                fontFamily: 'Arial, sans-serif',
-                fontWeight: 'bold',
-              }}
-            >
-              <b> {segmentData.segment_title}</b>
-            </div>
+            {/* HEADER */}
+            <SegmentHeader segmentData={segmentData} episodeData={episodeData} />
 
-            {/* Bullet Points */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '75%',
-                alignItems: 'center',
-                color: 'white',
-                textAlign: 'left',
-                fontSize: 30,
-                paddingLeft: '30px',
-                paddingRight: '30px',
-              }}
-            >
-              {segmentData.bullets.map((bullet, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    marginBottom: '10px',
-                    textAlign: 'justify',
-                    textJustify: 'inter-word',
-                  }}
-                >
-                  - {bullet}
-                </div>
-              ))}
-            </div>
-          </div>
+            {/* BODY */}
+            <SegmentBody
+              segmentData={segmentData}
+              tweet={tweet}
+              quotedTweet={quotedTweet}
+              TLDLLogo={TLDLLogoBase64}
+            />
 
-          {/* Segment Number / Total Segment Number */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              paddingRight: '10px',
-              fontSize: '28px',
-              fontStyle: 'normal',
-              color: 'white',
-              // backgroundColor: 'rgba(25, 10, 10)',
-              textAlign: 'right',
-              width: '100%',
-              height: '55px',
-            }}
-          >
-            {segmentData.segment_number}/{episodeData.episode_data.length}
+            {/* FOOTER */}
+            <EpisodeFooter episodeData={episodeData} imageBase64={TDGLogo} />
           </div>
         </div>
       ),
@@ -184,7 +132,15 @@ export async function GET(req: NextRequest) {
         fonts: [
           {
             name: 'Roboto',
-            data: fontArrayBuffer,
+            data: robotoRegular,
+          },
+          {
+            name: 'RobotoBold',
+            data: robotoBold,
+          },
+          {
+            name: 'RobotoMedium',
+            data: robotoMedium,
           },
         ],
       },
