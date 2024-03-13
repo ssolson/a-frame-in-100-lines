@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  width: 100%;
+  min-width: 250px;
+  max-width: 550px;
+  overflow: hidden;
+  /* Base font styles */
+  color: var(--tweet-font-color);
+  /* font-family: var(--tweet-font-family); */
+  font-weight: 400;
+  box-sizing: border-box;
+  border: var(--tweet-border);
+  border-radius: 12px;
+  margin: var(--tweet-container-margin);
+  background-color: var(--tweet-bg-color);
+  transition-property: background-color, box-shadow;
+  transition-duration: 0.2s;
+}
+/* .root:hover {
+  display: flex; 
+  background-color: var(--tweet-bg-color-hover);
+} */
+.article {
+  display: flex;
+  position: relative; 
+  box-sizing: inherit;
+   padding: 0.75rem 1rem;
+}
