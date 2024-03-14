@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
   const robotoRegular = await fetchFontArrayBuffer(fontFiles.robotoRegularFile);
   const robotoBold = await fetchFontArrayBuffer(fontFiles.robotoBoldFile);
   const robotoMedium = await fetchFontArrayBuffer(fontFiles.robotoMediumFile);
+  const robotoLight = await fetchFontArrayBuffer(fontFiles.robotoLightFile);
 
   // IMAGES
   const TDGLogoFile = await fetchImageArrayBuffer(imageFiles.TDGLogoFile);
@@ -79,6 +80,7 @@ export async function GET(req: NextRequest) {
             flexDirection: 'column',
             backgroundColor: 'black',
             backgroundSize: '1200px 630px',
+            position: 'relative',
           }}
         >
           {/* Background Image Container */}
@@ -105,13 +107,44 @@ export async function GET(req: NextRequest) {
               width: '100%',
               height: '630px',
               paddingTop: '10px',
-              paddingLeft: '20px',
-              paddingRight: '20px',
+              // paddingLeft: '20px',
+              // paddingRight: '20px',
               paddingBottom: '0px',
             }}
           >
             {/* HEADER */}
             <SegmentHeader segmentData={segmentData} episodeData={episodeData} />
+
+            {/* DOG EAR */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                width: '100px',
+                height: '100px',
+                position: 'absolute',
+                top: '0px',
+                right: '0px',
+                clipPath: 'polygon(100% 0, 0 0, 100% 100%)',
+                backgroundColor: 'rgba(35,35,35,0.9)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  position: 'absolute',
+                  transform: 'rotate(45deg)',
+                  transformOrigin: 'center',
+                  top: '20px',
+                  right: '13px',
+                  fontFamily: '"RobotoMedium"',
+                  fontSize: '18px',
+                  color: 'white',
+                }}
+              >
+                {segmentData.segment_number} of {episodeData.episode_data.length}
+              </div>
+            </div>
 
             {/* BODY */}
             <SegmentBody
@@ -141,6 +174,10 @@ export async function GET(req: NextRequest) {
           {
             name: 'RobotoMedium',
             data: robotoMedium,
+          },
+          {
+            name: 'RobotoLight',
+            data: robotoLight,
           },
         ],
       },

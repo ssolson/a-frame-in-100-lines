@@ -18,6 +18,8 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
         width: '100%',
         color: 'white',
         fontSize: '28px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
       }}
     >
       {/* Segment Title */}
@@ -25,16 +27,19 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
         style={{
           display: 'flex',
           width: '100%',
-          justifyContent: 'center',
-          marginBottom: '20px',
+          justifyContent: 'flex-start',
+          borderLeft: '5px solid rgb(249, 24, 128)',
+          paddingLeft: '13px',
+          marginTop: '20px',
         }}
       >
         <div
           style={{
-            fontFamily: '"RobotoMedium"',
+            fontFamily: '"RobotoLight"',
+            textWrap: 'balance',
             fontWeight: 'bold',
             fontSize: '36px',
-            textAlign: 'center',
+            textAlign: 'start',
             paddingRight: '100px',
           }}
         >
@@ -43,14 +48,16 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
       </div>
 
       {/* Dog Ear and Segment Number */}
-      <div
+      {/* <div
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
           width: '100%',
           position: 'absolute',
-          top: '-20px',
-          right: '-20px',
+          top: '0px',
+          right: '0px',
+          borderRight: '1px solid rgb(249, 24, 128)',
+          borderTop: '1px solid rgb(249, 24, 128)',
         }}
       >
         <div
@@ -78,7 +85,7 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
         >
           {segmentData.segment_number} of {episodeData.episode_data.length}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

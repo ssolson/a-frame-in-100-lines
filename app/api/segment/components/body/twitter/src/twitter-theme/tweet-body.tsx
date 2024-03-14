@@ -6,14 +6,14 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
   <p
     style={{
       display: 'flex',
-      // fontSize: '1.25rem',
-      // fontWeight: '400',
-      // lineHeight: '1.5rem',
-      // margin: '0',
-      // overflowWrap: 'break-word',
-      // whiteSpace: 'pre-wrap',
-      // color: 'white',
-      backgroundColor: 'blue',
+      fontSize: '1.25rem',
+      fontWeight: '400',
+      lineHeight: '1.5rem',
+      margin: '0',
+      overflowWrap: 'break-word',
+      whiteSpace: 'pre-wrap',
+      color: 'white',
+      // backgroundColor: 'blue',
     }}
   >
     {tweet.entities.map((item, i) => {
@@ -38,8 +38,6 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
           // https://github.com/vercel-labs/react-tweet/issues/29
           // return <span key={i} dangerouslySetInnerHTML={{ __html: item.text }} />;
           return <span key={i}>{item.text}</span>;
-        // return <div key={i}>{item.text}</div>;
-        // return <div style={{ backgroundColor: 'blue' }}>{item.text}</div>;
       }
     })}
   </p>

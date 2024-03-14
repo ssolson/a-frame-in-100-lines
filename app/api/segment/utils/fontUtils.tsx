@@ -6,6 +6,7 @@ import fetch from 'node-fetch';
 const robotoRegularFile = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Regular.ttf`;
 const robotoBoldFile = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Bold.ttf`;
 const robotoMediumFile = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Medium.ttf`;
+const robotoLightFile = `${process.env.NEXT_PUBLIC_URL}/fonts/roboto/Roboto-Light.ttf`;
 
 export const fetchFontArrayBuffer = async (url: string): Promise<ArrayBuffer> => {
   const response = await fetch(url);
@@ -24,4 +25,5 @@ export const fontFiles = {
   robotoRegularFile,
   robotoBoldFile,
   robotoMediumFile,
+  robotoLightFile,
 };

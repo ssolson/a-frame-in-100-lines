@@ -18,6 +18,7 @@ export const TweetHeader = ({ tweet, components }: Props) => {
       style={{
         display: 'flex',
         width: '100%',
+        maxWidth: '85%',
         paddingBottom: '0.75rem',
         lineHeight: '1.25rem',
         fontSize: '0.9375rem',
@@ -32,6 +33,7 @@ export const TweetHeader = ({ tweet, components }: Props) => {
             display: 'flex',
             height: '100%',
             width: '100%',
+
             position: 'absolute',
             overflow: 'hidden',
             borderRadius: '9999px',
@@ -142,34 +144,6 @@ export const TweetHeader = ({ tweet, components }: Props) => {
           </div>
         </div>
       </div>
-      <a
-        href={tweet.url}
-        style={{
-          display: 'flex',
-          flexGrow: 1,
-          justifyContent: 'flex-end',
-        }}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="View on Twitter"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          style={{
-            display: 'flex',
-            width: '23.75px',
-            height: '23.75px',
-          }}
-        >
-          <g>
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-              style={{ fill: '#fff' }}
-            ></path>
-          </g>
-        </svg>
-      </a>
     </div>
   );
 };

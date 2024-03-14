@@ -23,9 +23,12 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ segmentData, tweet, quotedTwe
         color: 'white',
         whiteSpace: 'pre-wrap',
         textAlign: 'start',
+        alignItems: 'center',
         height: 'auto',
-        maxHeight: '70%',
         overflow: 'hidden',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        marginBottom: '65px',
       }}
     >
       {/* Bullet Points & Twitter*/}

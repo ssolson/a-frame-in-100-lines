@@ -6,12 +6,11 @@ import './theme.css';
 type Props = { className?: string; children: ReactNode };
 
 export const TweetContainer = ({ className, children }: Props) => {
-  console.log('s', s);
-  console.log(clsx('react-tweet-theme', s.root, className));
   return (
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         width: '60%',
         minWidth: '250px',
         // maxWidth: '550px',
@@ -30,6 +29,7 @@ export const TweetContainer = ({ className, children }: Props) => {
       <div
         style={{
           display: 'flex',
+          flexDirection: 'column',
           position: 'relative',
           boxSizing: 'border-box',
           padding: '0.75rem 1rem',

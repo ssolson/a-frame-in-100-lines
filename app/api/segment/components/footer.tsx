@@ -22,40 +22,75 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
     <div
       style={{
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: '22px',
         fontStyle: 'normal',
         color: 'white',
         textAlign: 'right',
         width: '100%',
-        height: '10%',
+        height: '65px',
+        position: 'absolute',
+        bottom: '0px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        // backgroundColor: 'salmon',
       }}
     >
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
+          fontFamily: '"RobotoLight"',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            width="50"
-            height="50"
-            src={`data:image/jpeg;base64,${imageBase64}`}
-            style={{
-              borderRadius: 128,
-              marginRight: '10px',
-            }}
-            alt="Episode"
-          />
+        <img
+          width="50"
+          height="50"
+          src={`data:image/jpeg;base64,${imageBase64}`}
+          style={{
+            borderRadius: 128,
+            marginRight: '10px',
+          }}
+          alt="Episode"
+        />
+
+        <div
+          style={{
+            display: 'flex',
+            borderBottom: '2px solid rgb(249, 24, 128)',
+            paddingBottom: '5px',
+          }}
+        >
           {episodeData.episode_number}: {episodeData.episode_title}
         </div>
-
-        <div style={{ display: 'flex', fontSize: '20px' }}>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            fontSize: '20px',
+            borderRight: '1.5px solid rgb(249, 24, 128)',
+            paddingRight: '8px',
+            fontFamily: '"RobotoLight"',
+          }}
+        >
           {`${episodeData.episode_date.toString().substring(0, 4)}.${episodeData.episode_date.toString().substring(4, 6)}.${episodeData.episode_date.toString().substring(6, 8)}`}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            paddingLeft: '5px',
+            color: 'rgb(249, 24, 128)',
+            fontFamily: '"RobotoBold"',
+          }}
+        >
+          TLDL
         </div>
       </div>
     </div>
