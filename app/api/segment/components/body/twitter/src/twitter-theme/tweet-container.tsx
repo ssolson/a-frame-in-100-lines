@@ -13,6 +13,7 @@ export const TweetContainer = ({ className, children }: Props) => {
         flexDirection: 'column',
         width: '60%',
         minWidth: '250px',
+        maxHeight: '450',
         // maxWidth: '550px',
         overflow: 'hidden',
         // /* font-family: var(--tweet-font-family); */

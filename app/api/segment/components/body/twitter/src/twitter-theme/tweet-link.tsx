@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import s from './tweet-link.module.css';
 
 type Props = {
   children: ReactNode;
@@ -11,6 +10,7 @@ export const TweetLink = ({ href, children }: Props) => (
     href={href}
     style={{
       // display: 'flex',
+      display: 'inline',
       fontWeight: 'inherit',
       color: 'rgb(0, 111, 214)',
       textDecoration: 'none',

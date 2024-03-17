@@ -5,7 +5,8 @@ import { TweetContainer } from './src/twitter-theme/tweet-container';
 import { TweetHeader } from './src/twitter-theme/tweet-header';
 import { TweetInReplyTo } from './src/twitter-theme/tweet-in-reply-to';
 import { TweetBody } from './src/twitter-theme/tweet-body';
-import { TweetMedia } from 'src/twitter-theme/tweet-media';
+import { TweetMedia } from './src/twitter-theme/tweet-media';
+import { QuotedTweet } from './src/twitter-theme/quoted-tweet';
 
 interface TweetComponentProps {
   tweet: EnrichedTweet;
@@ -29,15 +30,16 @@ const TweetComponent: React.FC<TweetComponentProps> = ({ tweet, quotedTweet }) =
     return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   };
 
-  console.log('tweet', tweet.entities);
   return (
     <div
       style={{
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         paddingLeft: '25px',
-        marginTop: 'auto',
-        marginBottom: 'auto',
+        // marginTop: 'auto',
+        // marginBottom: 'auto',
+        overflow: 'hidden',
+        maxHeight: '100%',
       }}
     >
       <TweetContainer>
@@ -61,9 +63,10 @@ const TweetComponent: React.FC<TweetComponentProps> = ({ tweet, quotedTweet }) =
           </g>
         </svg>
         <TweetHeader tweet={tweet} />
-        {/* {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />} */}
+        {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
         <TweetBody tweet={tweet} />
-        {/* {tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} components={components} /> : null} */}
+        {tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
+        {tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
       </TweetContainer>
     </div>
   );

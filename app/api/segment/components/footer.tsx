@@ -30,11 +30,13 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
         textAlign: 'right',
         width: '100%',
         height: '65px',
-        position: 'absolute',
-        bottom: '0px',
+        minHeight: '65px',
+        maxHeight: '65px',
+        // position: 'absolute',
+        // bottom: '0px',
         paddingLeft: '15px',
         paddingRight: '15px',
-        // backgroundColor: 'salmon',
+        // backgroundColor: 'slategray',
       }}
     >
       <div

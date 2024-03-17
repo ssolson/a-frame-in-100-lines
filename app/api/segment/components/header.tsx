@@ -14,12 +14,17 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
+        height: '90px',
+        minHeight: '90px',
+        maxHeight: '90px',
         alignItems: 'center',
+        justifyContent: 'center',
         width: '100%',
         color: 'white',
         fontSize: '28px',
         paddingLeft: '20px',
         paddingRight: '20px',
+        // backgroundColor: 'slategray',
       }}
     >
       {/* Segment Title */}
@@ -30,7 +35,7 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ segmentData, episodeData 
           justifyContent: 'flex-start',
           borderLeft: '5px solid rgb(249, 24, 128)',
           paddingLeft: '13px',
-          marginTop: '20px',
+          // marginTop: '20px',
         }}
       >
         <div

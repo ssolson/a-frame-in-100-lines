@@ -16,19 +16,23 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ segmentData, tweet, quotedTwe
     <div
       style={{
         display: 'flex',
-        flexGrow: 1,
+        // flexGrow: 1,
+        height: '475px',
+        maxHeight: '475px',
+        minHeight: '475px',
         flexDirection: 'column',
-        justifyContent: 'center',
-        fontStyle: 'normal',
+        // justifyContent: 'flex-start',
+        // fontStyle: 'normal',
         color: 'white',
-        whiteSpace: 'pre-wrap',
-        textAlign: 'start',
-        alignItems: 'center',
-        height: 'auto',
-        overflow: 'hidden',
+        // whiteSpace: 'pre-wrap',
+        // textAlign: 'start',
+        // alignItems: 'center',
+        // height: 'auto',
+        // overflow: 'hidden',
         paddingLeft: '20px',
         paddingRight: '20px',
-        marginBottom: '65px',
+        // marginBottom: '65px',
+        // backgroundColor: 'rgba(35,35,35)',
       }}
     >
       {/* Bullet Points & Twitter*/}
@@ -51,13 +55,11 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ segmentData, tweet, quotedTwe
         {tweet ? (
           <TweetComponent tweet={tweet} quotedTweet={quotedTweet} />
         ) : (
-          // <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '25px' }}>
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              padding: '10px',
-              // backgroundColor: '#2f3640',
+              // padding: '10px',
               height: '100%',
               alignContent: 'center',
               justifyContent: 'center',

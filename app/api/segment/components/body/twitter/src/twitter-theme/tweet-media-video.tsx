@@ -1,55 +1,57 @@
-'use client'
-
-import { useState } from 'react'
-import clsx from 'clsx'
-import type { MediaAnimatedGif, MediaVideo } from '../api/index.js'
-import { EnrichedQuotedTweet, type EnrichedTweet, getMediaUrl, getMp4Video } from '../utils.js'
-import mediaStyles from './tweet-media.module.css'
-import s from './tweet-media-video.module.css'
+import type { MediaAnimatedGif, MediaVideo } from '../api/index.js';
+import { EnrichedQuotedTweet, type EnrichedTweet, getMediaUrl, getMp4Video } from '../utils';
+import mediaStyles from './tweet-media.module.css';
+import s from './tweet-media-video.module.css';
 
 type Props = {
-  tweet: EnrichedTweet | EnrichedQuotedTweet
-  media: MediaAnimatedGif | MediaVideo
-}
+  tweet: EnrichedTweet | EnrichedQuotedTweet;
+  media: MediaAnimatedGif | MediaVideo;
+};
 
 export const TweetMediaVideo = ({ tweet, media }: Props) => {
-  const [playButton, setPlayButton] = useState(true)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [ended, setEnded] = useState(false)
-  const mp4Video = getMp4Video(media)
-  let timeout = 0
+  const mp4Video = getMp4Video(media);
+  let timeout = 0;
+
+  console.log('media', media);
 
   return (
     <>
-      <video
-        className={mediaStyles.image}
+      {/* <video
+        style={{
+          position: 'absolute',
+          top: '0px',
+          left: '0px',
+          bottom: '0px',
+          height: '100%',
+          width: '100%',
+          margin: '0',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
         poster={getMediaUrl(media, 'small')}
-        controls={!playButton}
         muted
-        preload="metadata"
-        tabIndex={playButton ? -1 : 0}
-        onPlay={() => {
-          if (timeout) window.clearTimeout(timeout)
-          if (!isPlaying) setIsPlaying(true)
-          if (ended) setEnded(false)
-        }}
-        onPause={() => {
-          // When the video is seeked (moved to a different timestamp), it will pause for a moment
-          // before resuming. We don't want to show the message in that case so we wait a bit.
-          if (timeout) window.clearTimeout(timeout)
-          timeout = window.setTimeout(() => {
-            if (isPlaying) setIsPlaying(false)
-            timeout = 0
-          }, 100)
-        }}
-        onEnded={() => {
-          setEnded(true)
-        }}
       >
         <source src={mp4Video.url} type={mp4Video.content_type} />
-      </video>
-
-      {playButton && (
+      </video> */}
+      <img
+        // src={getMediaUrl(media, 'small')}
+        src={
+          'https://pbs.twimg.com/ext_tw_video_thumb/1767176821261377536/pu/img/gmUzYkOYHgW75_GO.jpg'
+        }
+        // alt={media.ext_alt_text || 'Image'}
+        style={{
+          position: 'absolute',
+          top: '0px',
+          left: '0px',
+          bottom: '0px',
+          height: '100%',
+          width: '100%',
+          margin: '0',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
+      />
+      {/* {playButton && (
         <button
           type="button"
           className={s.videoButton}
@@ -74,9 +76,9 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
             </g>
           </svg>
         </button>
-      )}
+      )} */}
 
-      {!isPlaying && !ended && (
+      {/* {!isPlaying && !ended && (
         <div className={s.watchOnTwitter}>
           <a
             href={tweet.url}
@@ -87,9 +89,9 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
             {playButton ? 'Watch on Twitter' : 'Continue watching on Twitter'}
           </a>
         </div>
-      )}
+      )} */}
 
-      {ended && (
+      {/* {ended && (
         <a
           href={tweet.url}
           className={clsx(s.anchor, s.viewReplies)}
@@ -98,7 +100,7 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
         >
           View replies
         </a>
-      )}
+      )} */}
     </>
-  )
-}
+  );
+};

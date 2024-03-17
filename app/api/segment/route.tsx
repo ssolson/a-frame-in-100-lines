@@ -104,9 +104,10 @@ export async function GET(req: NextRequest) {
             style={{
               display: 'flex',
               flexDirection: 'column',
+              justifyContent: 'space-between',
               width: '100%',
               height: '630px',
-              paddingTop: '10px',
+              // height: '100%',
               // paddingLeft: '20px',
               // paddingRight: '20px',
               paddingBottom: '0px',

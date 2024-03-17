@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { TweetUser } from '../api/index.js';
-import { Verified, VerifiedBusiness, VerifiedGovernment } from './icons/index.js';
+import { Verified, VerifiedBusiness, VerifiedGovernment } from './icons/index';
 import s from './verified-badge.module.css';
 
 type Props = {
