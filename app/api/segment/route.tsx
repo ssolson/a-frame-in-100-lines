@@ -65,6 +65,9 @@ export async function GET(req: NextRequest) {
         tweet = enrichTweet(tweet);
       }
       quotedTweet = tweetData.quotedTweet;
+      if (quotedTweet) {
+        quotedTweet = enrichTweet(quotedTweet);
+      }
     }
 
     return new ImageResponse(
@@ -120,26 +123,24 @@ export async function GET(req: NextRequest) {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'flex-end',
-                width: '100px',
-                height: '100px',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                width: '155px',
+                height: '150px',
                 position: 'absolute',
                 top: '0px',
                 right: '0px',
-                clipPath: 'polygon(100% 0, 0 0, 100% 100%)',
+                transform: 'translate(50%, -50%)  rotate(45deg)',
                 backgroundColor: 'rgba(35,35,35,0.9)',
+                paddingBottom: '15px',
+                paddingRight: '5px',
               }}
             >
               <div
                 style={{
                   display: 'flex',
-                  position: 'absolute',
-                  transform: 'rotate(45deg)',
-                  transformOrigin: 'center',
-                  top: '20px',
-                  right: '13px',
                   fontFamily: '"RobotoMedium"',
-                  fontSize: '18px',
+                  fontSize: '20px',
                   color: 'white',
                 }}
               >

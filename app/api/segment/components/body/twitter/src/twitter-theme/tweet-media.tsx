@@ -41,7 +41,7 @@ export const TweetMedia = ({ tweet, components, quoted }: Props) => {
         overflow: 'hidden',
         position: 'relative',
         borderRadius: '12px',
-        height: '35%',
+        maxHeight: '30%',
         width: '100%',
         border: '1px solid rgb(66, 83, 100)',
       }}
@@ -79,21 +79,17 @@ export const TweetMedia = ({ tweet, components, quoted }: Props) => {
                 outlineStyle: 'none',
               }}
             >
-              <div
-                className={s.skeleton}
-                style={{ width: 'undefined', ...getSkeletonStyle(media, length) }}
-              />
               <img
                 src={getMediaUrl(media, 'small')}
                 style={{
-                  position: 'absolute',
-                  top: '0px',
-                  left: '0px',
-                  bottom: '0px',
-                  height: '100%',
-                  width: '100%',
-                  margin: '0',
-                  objectFit: 'cover',
+                  // position: 'absolute',
+                  // top: '0px',
+                  // left: '0px',
+                  // bottom: '0px',
+                  // height: '100%',
+                  // width: '100%',
+                  // margin: '0',
+                  objectFit: 'contain',
                   objectPosition: 'center',
                 }}
               />

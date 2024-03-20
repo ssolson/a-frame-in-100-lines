@@ -17,14 +17,17 @@ export const TweetHeader = ({ tweet, components }: Props) => {
     <div
       style={{
         display: 'flex',
+        height: '50px',
+        // maxHeight: '48px',
         width: '100%',
-        maxWidth: '85%',
+        // maxWidth: '85%',
         paddingBottom: '0.75rem',
         lineHeight: '1.25rem',
         fontSize: '0.9375rem',
         whiteSpace: 'nowrap',
         overflowWrap: 'break-word',
         overflow: 'hidden',
+        // backgroundColor: 'rgb(200, 32, 43)',
       }}
     >
       <div style={{ display: 'flex', position: 'relative', height: '48px', width: '48px' }}>

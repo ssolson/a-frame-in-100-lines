@@ -1,13 +1,14 @@
 import { SegmentProps } from '../../../../../types';
 
-import { type Tweet } from 'react-tweet/api';
 import Bullets from './bullets';
 import TweetComponent from './twitter/twitter';
 
+import { EnrichedTweet } from './twitter/src/utils';
+
 interface SegmentBodyProps {
   segmentData: SegmentProps;
-  tweet?: Tweet;
-  quotedTweet?: Tweet;
+  tweet?: EnrichedTweet;
+  quotedTweet?: EnrichedTweet;
   TLDLLogo: string;
 }
 
@@ -16,23 +17,13 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ segmentData, tweet, quotedTwe
     <div
       style={{
         display: 'flex',
-        // flexGrow: 1,
         height: '475px',
         maxHeight: '475px',
         minHeight: '475px',
         flexDirection: 'column',
-        // justifyContent: 'flex-start',
-        // fontStyle: 'normal',
         color: 'white',
-        // whiteSpace: 'pre-wrap',
-        // textAlign: 'start',
-        // alignItems: 'center',
-        // height: 'auto',
-        // overflow: 'hidden',
         paddingLeft: '20px',
         paddingRight: '20px',
-        // marginBottom: '65px',
-        // backgroundColor: 'rgba(35,35,35)',
       }}
     >
       {/* Bullet Points & Twitter*/}
@@ -44,7 +35,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ segmentData, tweet, quotedTwe
           alignItems: 'flex-start',
           margin: 'auto',
           color: 'white',
-          fontSize: 25,
+          fontSize: 30,
           textAlign: 'justify',
         }}
       >

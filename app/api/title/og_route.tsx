@@ -5,12 +5,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import getEpisodeData from '../../utils/dbUtils';
 import { EpisodeProps } from '../../../types';
-import SegmentHeader from './components/header';
-import SegmentBody from './components/body';
-import EpisodeFooter from './components/footer';
-
-import { fetchFontArrayBuffer, arrayBufferToBase64, fontFiles } from '../segment/utils/fontUtils';
-import { fetchImageArrayBuffer, imageFiles } from '../segment/utils/imageUtils';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -31,18 +25,6 @@ export async function GET(req: NextRequest) {
 
     const episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
 
-    // FONTS
-    const robotoRegular = await fetchFontArrayBuffer(fontFiles.robotoRegularFile);
-    const robotoBold = await fetchFontArrayBuffer(fontFiles.robotoBoldFile);
-    const robotoMedium = await fetchFontArrayBuffer(fontFiles.robotoMediumFile);
-    const robotoLight = await fetchFontArrayBuffer(fontFiles.robotoLightFile);
-
-    const TDGLogoFile = await fetchImageArrayBuffer(imageFiles.TDGLogoFile);
-    const TLDLLogo = await fetchImageArrayBuffer(imageFiles.TLDLLogo);
-
-    const TDGLogo = arrayBufferToBase64(TDGLogoFile);
-    const TLDLLogoBase64 = arrayBufferToBase64(TLDLLogo);
-
     return new ImageResponse(
       (
         <div
@@ -59,32 +41,43 @@ export async function GET(req: NextRequest) {
             backgroundSize: '100px 100px',
           }}
         >
-          <SegmentHeader episodeData={episodeData} TDGLogo={TDGLogo} />
-          <SegmentBody episodeData={episodeData} TLDLLogo={TLDLLogoBase64} />
-          <EpisodeFooter episodeData={episodeData} imageBase64={TDGLogo} />
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 40,
+              fontStyle: 'normal',
+              color: 'white',
+              marginTop: 30,
+              lineHeight: 1.8,
+              whiteSpace: 'pre-wrap',
+            }}
+          >
+            <b>
+              {episodeData.episode_number}: {episodeData.episode_title}
+            </b>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              textAlign: 'left',
+              color: 'white',
+              fontSize: '30px',
+              marginTop: '2px',
+              lineHeight: '1',
+            }}
+          >
+            {episodeData.episode_data.slice(1).map((segment, index) => (
+              <p style={{ margin: '0px' }} key={index}>
+                {index + 1}. {segment.segment_title}.
+              </p>
+            ))}
+          </div>
         </div>
       ),
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: 'Roboto',
-            data: robotoRegular,
-          },
-          {
-            name: 'RobotoBold',
-            data: robotoBold,
-          },
-          {
-            name: 'RobotoMedium',
-            data: robotoMedium,
-          },
-          {
-            name: 'RobotoLight',
-            data: robotoLight,
-          },
-        ],
       },
     );
   } else {

@@ -7,22 +7,12 @@ interface EpisodeFooterProps {
   imageBase64: string;
 }
 
-const TLDLLogo = `${process.env.NEXT_PUBLIC_URL}/TLDL.png`;
-
-const fetchFontArrayBuffer = async (url: string) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch the font: ${response.statusText}`);
-  }
-  return response.arrayBuffer();
-};
-
 const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 }) => {
   return (
     <div
       style={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         fontSize: '26',
         fontStyle: 'normal',
@@ -32,8 +22,6 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
         height: '65px',
         minHeight: '65px',
         maxHeight: '65px',
-        // position: 'absolute',
-        // bottom: '0px',
         paddingLeft: '15px',
         paddingRight: '15px',
         // backgroundColor: 'slategray',
@@ -42,35 +30,8 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          fontFamily: '"Roboto"',
-        }}
-      >
-        <img
-          width="50"
-          height="50"
-          src={`data:image/jpeg;base64,${imageBase64}`}
-          style={{
-            borderRadius: 128,
-            marginRight: '10px',
-          }}
-          alt="Episode"
-        />
-
-        <div
-          style={{
-            display: 'flex',
-            borderBottom: '2px solid rgb(249, 24, 128)',
-            paddingBottom: '5px',
-          }}
-        >
-          {episodeData.episode_number}: {episodeData.episode_title}
-        </div>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-end',
           fontSize: '24px',
         }}
       >
