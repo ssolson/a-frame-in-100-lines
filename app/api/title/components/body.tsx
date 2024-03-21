@@ -10,7 +10,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
   const { episode_data } = episodeData;
 
   // Calculate split for segments if necessary.
-  const splitIndex = episode_data.length > 9 ? Math.ceil(episode_data.slice(1).length / 2) : 0;
+  const splitIndex = episode_data.length > 7 ? Math.ceil(episode_data.slice(1).length / 2) : 0;
 
   return (
     <div
@@ -53,7 +53,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                margin: '5px 0',
+                margin: '8px 0',
                 borderRadius: '10px',
                 boxSizing: 'border-box',
               }}
@@ -131,7 +131,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  margin: '5px 0',
+                  margin: '8px 0',
                   borderRadius: '10px',
                   boxSizing: 'border-box',
                 }}
