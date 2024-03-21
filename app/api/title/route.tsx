@@ -13,6 +13,19 @@ import { fetchFontArrayBuffer, arrayBufferToBase64, fontFiles } from '../segment
 import { fetchImageArrayBuffer, imageFiles } from '../segment/utils/imageUtils';
 
 export async function GET(req: NextRequest) {
+  // FONTS
+  const robotoRegular = await fetchFontArrayBuffer(fontFiles.robotoRegularFile);
+  const robotoBold = await fetchFontArrayBuffer(fontFiles.robotoBoldFile);
+  const robotoMedium = await fetchFontArrayBuffer(fontFiles.robotoMediumFile);
+  const robotoLight = await fetchFontArrayBuffer(fontFiles.robotoLightFile);
+
+  // IMAGES
+  const TDGLogoFile = await fetchImageArrayBuffer(imageFiles.TDGLogoFile);
+  const TLDLLogo = await fetchImageArrayBuffer(imageFiles.TLDLLogo);
+
+  const TDGLogo = arrayBufferToBase64(TDGLogoFile);
+  const TLDLLogoBase64 = arrayBufferToBase64(TLDLLogo);
+
   const { searchParams } = new URL(req.url);
   const episodeNumberStr = searchParams.get('episode_number');
 
@@ -30,18 +43,6 @@ export async function GET(req: NextRequest) {
     }
 
     const episodeData: EpisodeProps = episodeDataResult as unknown as EpisodeProps;
-
-    // FONTS
-    const robotoRegular = await fetchFontArrayBuffer(fontFiles.robotoRegularFile);
-    const robotoBold = await fetchFontArrayBuffer(fontFiles.robotoBoldFile);
-    const robotoMedium = await fetchFontArrayBuffer(fontFiles.robotoMediumFile);
-    const robotoLight = await fetchFontArrayBuffer(fontFiles.robotoLightFile);
-
-    const TDGLogoFile = await fetchImageArrayBuffer(imageFiles.TDGLogoFile);
-    const TLDLLogo = await fetchImageArrayBuffer(imageFiles.TLDLLogo);
-
-    const TDGLogo = arrayBufferToBase64(TDGLogoFile);
-    const TLDLLogoBase64 = arrayBufferToBase64(TLDLLogo);
 
     return new ImageResponse(
       (

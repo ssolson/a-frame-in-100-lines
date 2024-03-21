@@ -16,8 +16,8 @@ import {
   validateSegmentNumber,
   extractSegmentData,
 } from './utils/episodeUtils';
-import { fetchTweetById, extractTweetIdFromUrl } from './utils/tweetUtils';
 
+import { fetchTweetById, extractTweetIdFromUrl } from './utils/tweetUtils';
 import { enrichTweet } from 'react-tweet';
 
 export async function GET(req: NextRequest) {
