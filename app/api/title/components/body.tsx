@@ -82,7 +82,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                 style={{
                   display: 'flex',
                   borderRadius: '7px',
-                  padding: '3px',
+                  padding: '4px',
                   background: 'linear-gradient(to right, rgba(249, 24, 128, 0.7), transparent)',
                 }}
               >
@@ -160,7 +160,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                   style={{
                     display: 'flex',
                     borderRadius: '7px',
-                    padding: '3px', // This acts as the border width
+                    padding: '4px', // This acts as the border width
                     background: 'linear-gradient(to right, rgba(249, 24, 128, 0.7), transparent)',
                   }}
                 >
