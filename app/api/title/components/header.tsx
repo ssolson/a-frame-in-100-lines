@@ -21,7 +21,7 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ episodeData, TDGLogo }) =
         justifyContent: 'center',
         width: '100%',
         color: 'white',
-        fontSize: '34px',
+        fontSize: '40px',
         paddingLeft: '20px',
         paddingRight: '20px',
         // backgroundColor: 'slategray',
@@ -52,7 +52,7 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ episodeData, TDGLogo }) =
         <div
           style={{
             display: 'flex',
-            fontSize: '36px',
+            // fontSize: '36px',
             textAlign: 'start',
             // paddingRight: '100px',
             overflow: 'hidden',
@@ -69,7 +69,7 @@ const SegmentHeader: React.FC<SegmentHeaderProps> = ({ episodeData, TDGLogo }) =
           style={{
             display: 'flex',
             fontFamily: '"RobotoLight"',
-            fontSize: '36px',
+            // fontSize: '36px',
             textAlign: 'start',
             // paddingRight: '100px',
             overflow: 'hidden',

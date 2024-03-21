@@ -14,7 +14,7 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        fontSize: '26',
+        fontSize: '28',
         fontStyle: 'normal',
         color: 'white',
         textAlign: 'right',
@@ -32,7 +32,6 @@ const EpisodeFooter: React.FC<EpisodeFooterProps> = ({ episodeData, imageBase64 
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'flex-end',
-          fontSize: '24px',
         }}
       >
         <div
