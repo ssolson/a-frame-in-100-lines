@@ -43,6 +43,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const nextSegmentNumber: Number = parseInt(currentSegmentNumber, 10) + 1;
     currentSegmentNumber = nextSegmentNumber.toString();
     imageObject = getSegmentImageObject(episodeNumberStr, currentSegmentNumber);
+  } else if (message?.button === 3) {
+    return NextResponse.redirect(
+      'https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms',
+      { status: 302 },
+    );
   } else {
     imageObject = getTitleImageObject(episodeNumberStr);
   }

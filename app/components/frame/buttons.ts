@@ -3,12 +3,15 @@
 import { FrameMetadataType } from '@coinbase/onchainkit';
 
 export const titleButtons: FrameMetadataType['buttons'] = [
-    {
-      label: 'Go To Segment #',
-    },
-    {
-      label: 'Next Segment',
-    },
-  ]
+  {
+    label: 'Go To Segment #',
+  },
+  {
+    label: 'Next Segment',
+  },
+  {
+    label: 'Google',
+  },
+];
 
-  export const segmentButtons: FrameMetadataType['buttons'] = titleButtons;
+export const segmentButtons: FrameMetadataType['buttons'] = titleButtons;
