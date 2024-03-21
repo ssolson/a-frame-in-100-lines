@@ -62,10 +62,10 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
               <div
                 style={{
                   display: 'flex',
-                  height: '40px',
-                  width: '40px',
-                  minWidth: '40px',
-                  border: '1px solid rgb(249, 24, 128)',
+                  height: '50px',
+                  width: '50px',
+                  minWidth: '50px',
+                  border: '2px solid rgb(249, 24, 128)',
                   borderRadius: '7px',
                   color: 'rgb(249, 24, 128)',
                   justifyContent: 'center',
@@ -82,7 +82,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                 style={{
                   display: 'flex',
                   borderRadius: '7px',
-                  padding: '2px',
+                  padding: '3px',
                   background: 'linear-gradient(to right, rgba(249, 24, 128, 0.7), transparent)',
                 }}
               >
@@ -139,10 +139,10 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                 {/* Index  */}
                 <div
                   style={{
-                    height: '40px',
-                    width: '40px',
-                    minWidth: '40px',
-                    border: '1px solid rgb(249, 24, 128)',
+                    height: '50px',
+                    width: '50px',
+                    minWidth: '50px',
+                    border: '2px solid rgb(249, 24, 128)',
                     borderRadius: '7px',
                     color: 'rgb(249, 24, 128)',
                     display: 'flex',
@@ -160,7 +160,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
                   style={{
                     display: 'flex',
                     borderRadius: '7px',
-                    padding: '2px', // This acts as the border width
+                    padding: '3px', // This acts as the border width
                     background: 'linear-gradient(to right, rgba(249, 24, 128, 0.7), transparent)',
                   }}
                 >
