@@ -25,7 +25,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   // Check for current segment
   let currentSegmentNumber = searchParams.get('current_segment');
   if (!currentSegmentNumber) {
-    currentSegmentNumber = '1';
+    currentSegmentNumber = '0';
   }
 
   // Validate Frame & get message (segment number)
