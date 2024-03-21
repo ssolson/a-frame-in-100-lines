@@ -10,7 +10,9 @@ export const titleButtons: FrameMetadataType['buttons'] = [
     label: 'Next Segment',
   },
   {
+    action: 'link',
     label: 'Google',
+    target: 'https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms',
   },
 ];
 
