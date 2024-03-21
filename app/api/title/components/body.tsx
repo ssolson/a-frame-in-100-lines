@@ -26,7 +26,6 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
         paddingLeft: '20px',
         paddingRight: '20px',
         overflow: 'hidden',
-        // backgroundColor: 'yellow',
       }}
     >
       {/* Dynamic Bullet Points Columns */}
@@ -36,7 +35,7 @@ const SegmentBody: React.FC<SegmentBodyProps> = ({ episodeData, TLDLLogo }) => {
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           color: 'white',
-          fontSize: 28,
+          fontSize: 32,
         }}
       >
         {/* Column 1: Bullet Points */}
